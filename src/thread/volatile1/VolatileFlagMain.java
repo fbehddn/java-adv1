@@ -19,9 +19,9 @@ public class VolatileFlagMain {
     }
 
     static class MyTask implements Runnable {
-        boolean runFlag = true;
+//        boolean runFlag = true;
 
-//        volatile boolean runFlag = true;
+        volatile boolean runFlag = true; //캐시 메모리를 사용하지 않고, 값을 읽거나 쓸 때 항상 메인 메모리에 직접 접근한다
 
         @Override
         public void run() {
@@ -29,9 +29,8 @@ public class VolatileFlagMain {
             while (runFlag) {
                 //runFlag 가 false 로 변하면 탈출
 //                System.out.println("1"); // 코드가 있으면 task가 종료됨 머지 ? ? ? ? -> 뒤에서 설명
-
 //                 콘솔에 내용을 출력하거나 Thread.sleep() 으로 인해 스레드가 잠쉬 쉬는데
-//                 이때 컨텍스트 스위칭이 일어나면서 갱신된다. -> 갱신을 보장하진 않음
+//                 이때 컨텍스트 스위칭이 일어나면서 갱신된다. -> 갱신을 "보장하진 않음"
             }
             log("task 종료");
         }
